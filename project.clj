@@ -1,4 +1,8 @@
 (defproject magitek-clicker "0.1.0-SNAPSHOT"
+  :description "A Simple Clicker Game in a Magitek World"
+  :url "https://github.com/Ionshard/magitek-clicker"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
                  [reagent "0.7.0"]
@@ -11,7 +15,7 @@
 
   :min-lein-version "2.5.3"
 
-  :source-paths ["src/clj"]
+  :source-paths ["src" "dev"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
@@ -34,7 +38,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs"]
+     :source-paths ["src" "dev"]
      :figwheel     {:on-jsload "magitek-clicker.core/mount-root"}
      :compiler     {:main                 magitek-clicker.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -47,7 +51,7 @@
                     }}
 
     {:id           "min"
-     :source-paths ["src/cljs"]
+     :source-paths ["src"]
      :compiler     {:main            magitek-clicker.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :optimizations   :advanced
