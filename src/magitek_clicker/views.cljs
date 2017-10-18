@@ -7,15 +7,15 @@
 ;; home
 
 (defn home-panel []
-  [sa/GridColumn "Welcome to Magitek Mech Clicker Game Thingy"
-   [:div [:a {:href "#/game"} "go to the Game"]]])
+  [sa/GridColumn
+   [sa/Container "Welcome to Magitek Clicker Game"]])
 
 
 ;; game
 
 (defn game-panel []
-  [sa/GridColumn "Game ON!"
-   [:div [:a {:href "#/"} "go to Home Page"]]])
+  [sa/GridColumn
+   [sa/Container "Game ON!"]])
 
 
 ;; main
@@ -46,5 +46,5 @@
     [sa/Grid
      [sa/GridRow {:id "menu"}
       [menu]]
-     [sa/GridRow {:id "content"} 
+     [sa/GridRow {:id "content"}
       [show-panel active-panel]]]))

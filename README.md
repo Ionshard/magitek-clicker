@@ -1,6 +1,16 @@
-# magitek-clicker
+# Magitek Clicker
 
-A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
+A simple clicker style game set in a Magitek world.
+
+## Inspiration
+
+* [Cookie Clicker](http://orteil.dashnet.org/cookieclicker/)
+* [Final Fantasy Magitek Armor](http://finalfantasy.wikia.com/wiki/Magitek_Armor)
+
+## Details
+* [re-frame](https://github.com/Day8/re-frame) for excellent application framework
+* [soda-ash](https://github.com/gadfly361/soda-ash) to wrap semantic-ui-react
+* [semantic-ui-react](https://react.semantic-ui.com/introduction) for great react components
 
 ## Development Mode
 
