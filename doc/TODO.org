@@ -1,5 +1,7 @@
 
 * TODO
 
-- Implement a tick system
-- Implement a click system
+- [X] Implement a tick system
+- [] Basic Styling
+- [] Learn Org
+- [] Develop MVP

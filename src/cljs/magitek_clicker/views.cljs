@@ -1,26 +1,36 @@
 (ns magitek-clicker.views
   (:require [re-frame.core :as re-frame]
-            [magitek-clicker.events :as events]))
+            [magitek-clicker.events :as events]
+            [soda-ash.core :as sa]))
 
 
 ;; home
 
 (defn home-panel []
-  (let [name (re-frame/subscribe [:name])]
-    (fn []
-      [:div (str "Hello from " @name ". This is the Home Page. Soon it will be a game")
-       [:div [:a {:href "#/game"} "go to the Game"]]])))
+  [sa/GridColumn "Welcome to Magitek Mech Clicker Game Thingy"
+   [:div [:a {:href "#/game"} "go to the Game"]]])
 
 
-;; about
+;; game
 
 (defn game-panel []
-  (fn []
-    [:div "This is the About Page."
-     [:div [:a {:href "#/"} "go to Home Page"]]]))
+  [sa/GridColumn "Game ON!"
+   [:div [:a {:href "#/"} "go to Home Page"]]])
 
 
 ;; main
+
+(defn- menu-item [text link key]
+  (let [active-panel @(re-frame/subscribe [:active-panel])]
+    [sa/MenuItem {:href link :name text :active (= active-panel key)}]))
+
+(defn- menu []
+  [sa/GridColumn
+   [sa/Menu {:pointing true
+             :secondary true}
+    [sa/MenuItem {:header true} [sa/Icon {:name :lightning}] "Magitek Clicker"]
+    [menu-item "Home" "#/" :home-panel]
+    [menu-item "Play" "#/game" :game-panel]]])
 
 (defn- panels [panel-name]
   (case panel-name
@@ -32,6 +42,9 @@
   [panels panel-name])
 
 (defn main-panel []
-  (let [active-panel (re-frame/subscribe [:active-panel])]
-    (fn []
-      [show-panel @active-panel])))
+  (let [active-panel @(re-frame/subscribe [:active-panel])]
+    [sa/Grid
+     [sa/GridRow {:id "menu"}
+      [menu]]
+     [sa/GridRow {:id "content"} 
+      [show-panel active-panel]]]))

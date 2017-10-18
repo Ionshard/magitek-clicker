@@ -1,6 +1,7 @@
 (ns magitek-clicker.events
   (:require [re-frame.core :as re-frame]
-            [magitek-clicker.db :as db]))
+            [magitek-clicker.db :as db]
+            [magitek-clicker.ticker :as ticker]))
 
 (re-frame/reg-event-db
  :initialize-db
@@ -12,10 +13,11 @@
  (fn [{:keys [db]} [_ active-panel]]
    (cond-> {:db (assoc db :active-panel active-panel)}
      (= active-panel :game-panel)
-     (assoc :dispatch [::tick]))))
+     (assoc :dispatch [:initialize-game])
+     (not= active-panel :game-panel)
+     (assoc :dispatch [::ticker/stop]))))
 
 (re-frame/reg-event-fx
- ::tick
- (fn [{:keys [db]} _]
-   {:db (update db :tick inc)
-    :dispatch-later [{:ms 1000 :dispatch [::tick]}]}))
+ :initialize-game
+ (fn [_ _]
+   {:dispatch-n [[::ticker/start]]}))
